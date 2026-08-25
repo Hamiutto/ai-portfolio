@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>朱芷怡 · AI 应用实践档案</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #171717;
+  --paper: #fffaf0;
+  --sheet: #fffdf7;
+  --pink: #f7a8c7;
+  --blue: #157fbd;
+  --yellow: #ffe04b;
+  --lime: #c7ff35;
+  --mint: #7ce0c3;
+  --violet: #a779ff;
+  --coral: #ff775c;
+  --line: 3px solid var(--ink);
+  --shadow: 8px 8px 0 var(--ink);
+  --shadow-sm: 5px 5px 0 var(--ink);
+  --radius: 8px;
+  --font-cn: "Noto Sans SC", system-ui, sans-serif;
+  --font-en: "Inter", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  color: var(--ink);
+  background:
+    linear-gradient(rgba(23,23,23,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23,23,23,.04) 1px, transparent 1px),
+    var(--paper);
+  background-size: 34px 34px;
+  font-family: var(--font-cn);
+  line-height: 1.65;
+}
+
+a { color: inherit; }
+.wrap { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+.topbar {
+  position: sticky;
+  top: 12px;
+  z-index: 20;
+  margin: 12px auto 0;
+  width: min(1160px, calc(100% - 40px));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 14px;
+  background: var(--sheet);
+  border: var(--line);
+  border-radius: 999px;
+  box-shadow: var(--shadow-sm);
+}
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 13px;
+  border: var(--line);
+  border-radius: 999px;
+  background: var(--lime);
+  font-family: var(--font-en);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .04em;
+  text-decoration: none;
+  transform: rotate(-2deg);
+}
+.nav { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+.nav a {
+  padding: 7px 11px;
+  border-radius: 999px;
+  font-family: var(--font-en);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-decoration: none;
+}
+.nav a:hover { background: var(--yellow); outline: 2px solid var(--ink); }
+
+.hero {
+  min-height: 90vh;
+  display: grid;
+  align-items: center;
+  padding: 92px 0 70px;
+}
+.eyebrow {
+  width: fit-content;
+  margin: 0 auto 26px;
+  padding: 9px 18px;
+  border: var(--line);
+  border-radius: 999px;
+  background: var(--sheet);
+  box-shadow: var(--shadow-sm);
+  font-family: var(--font-en);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 8px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--lime);
+}
+.hero-title {
+  margin: 0 auto;
+  max-width: 920px;
+  text-align: center;
+  font-family: var(--font-en);
+  font-size: clamp(52px, 11vw, 128px);
+  font-weight: 900;
+  line-height: .9;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+.hero-title span {
+  display: inline-block;
+  padding: 0 .08em .08em;
+  color: var(--pink);
+  -webkit-text-stroke: 3px var(--ink);
+  text-shadow: 5px 5px 0 var(--ink);
+}
+.hero-title strong {
+  display: inline-block;
+  color: var(--violet);
+  -webkit-text-stroke: 3px var(--ink);
+  text-shadow: 5px 5px 0 var(--ink);
+}
+.banner {
+  width: fit-content;
+  max-width: 92%;
+  margin: 36px auto 0;
+  padding: 12px 24px;
+  border: var(--line);
+  background: var(--yellow);
+  box-shadow: var(--shadow-sm);
+  font-size: clamp(18px, 3vw, 30px);
+  font-weight: 900;
+  transform: rotate(2deg);
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: .85fr 1.15fr;
+  gap: 34px;
+  align-items: center;
+  margin-top: 78px;
+}
+.portrait {
+  aspect-ratio: 1 / 1;
+  display: grid;
+  place-items: center;
+  border: var(--line);
+  border-radius: var(--radius);
+  background:
+    radial-gradient(circle at 20% 20%, var(--yellow) 0 8%, transparent 9%),
+    radial-gradient(circle at 82% 78%, var(--mint) 0 10%, transparent 11%),
+    linear-gradient(135deg, #ffe7f1, #e0f7ff 62%, #fff0bb);
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+  padding: clamp(22px, 4vw, 44px);
+}
+.portrait::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(23,23,23,.12) 1px, transparent 1px);
+  background-size: 18px 18px;
+  opacity: .42;
+}
+.portrait img {
+  position: relative;
+  z-index: 1;
+  width: min(82%, 430px);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center;
+  border: var(--line);
+  border-radius: var(--radius);
+  box-shadow: 6px 6px 0 var(--ink);
+  transform: rotate(-2deg);
+}
+.name-sticker {
+  position: absolute;
+  left: clamp(16px, 4vw, 34px);
+  top: clamp(16px, 4vw, 34px);
+  z-index: 2;
+  padding: 9px 14px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--lime);
+  font-family: var(--font-en);
+  font-size: clamp(12px, 2vw, 16px);
+  font-weight: 900;
+  letter-spacing: .04em;
+  box-shadow: 4px 4px 0 var(--ink);
+  transform: rotate(-5deg);
+}
+.photo-stamp {
+  position: absolute;
+  right: clamp(14px, 4vw, 28px);
+  bottom: clamp(14px, 4vw, 28px);
+  padding: 7px 10px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--yellow);
+  font-family: var(--font-en);
+  font-size: 10px;
+  font-weight: 900;
+  z-index: 1;
+  transform: rotate(3deg);
+}
+.profile-card {
+  border: var(--line);
+  border-radius: var(--radius);
+  background: var(--sheet);
+  box-shadow: var(--shadow);
+  padding: 28px;
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 22px;
+}
+.stat {
+  min-height: 86px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  border: var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  padding: 10px;
+}
+.stat b {
+  display: block;
+  font-family: var(--font-en);
+  font-size: clamp(22px, 4vw, 36px);
+  line-height: 1;
+  color: var(--pink);
+  -webkit-text-stroke: 1px var(--ink);
+}
+.stat small {
+  display: block;
+  margin-top: 5px;
+  font-family: var(--font-en);
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.role-chip {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 6px 12px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--lime);
+  font-family: var(--font-en);
+  font-size: 12px;
+  font-weight: 900;
+}
+.profile-card p { margin: 0; font-size: 17px; }
+.profile-card strong { background: linear-gradient(transparent 60%, var(--yellow) 60%); }
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+.chip {
+  padding: 6px 12px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: #fff;
+  font-family: var(--font-en);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+section { padding: 72px 0; }
+.section-label {
+  display: inline-block;
+  margin-bottom: 28px;
+  padding: 8px 14px;
+  border: var(--line);
+  border-radius: 999px;
+  background: var(--pink);
+  box-shadow: var(--shadow-sm);
+  font-family: var(--font-en);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.section-head {
+  display: block;
+  margin-bottom: 32px;
+}
+h2 {
+  margin: 0;
+  font-size: clamp(32px, 6vw, 62px);
+  line-height: .98;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+.ability-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.ability {
+  border: var(--line);
+  border-radius: var(--radius);
+  background: var(--sheet);
+  box-shadow: var(--shadow-sm);
+  padding: 22px;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.ability:hover { transform: translate(-2px, -2px); box-shadow: 9px 9px 0 var(--ink); }
+.ability:nth-child(1) { background: #e0f7ff; }
+.ability:nth-child(2) { background: #ffe7f1; }
+.ability:nth-child(3) { background: #edffd1; }
+.ability:nth-child(4) { background: #fff0bb; }
+.ability .no {
+  font-family: var(--font-en);
+  font-size: 34px;
+  font-weight: 900;
+  color: var(--blue);
+}
+.ability h3 { margin: 12px 0 8px; font-size: 20px; line-height: 1.2; }
+.ability p { margin: 0; font-size: 14px; }
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 28px;
+}
+.filter-btn {
+  border: var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  padding: 8px 14px;
+  font-family: var(--font-en);
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.filter-btn.active,
+.filter-btn:hover { background: var(--yellow); transform: translate(-1px, -1px); }
+
+.featured {
+  display: grid;
+  gap: 28px;
+}
+.project-card {
+  display: grid;
+  grid-template-columns: .9fr 1.1fr;
+  gap: 0;
+  border: var(--line);
+  border-radius: var(--radius);
+  background: var(--sheet);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.project-card[hidden] { display: none; }
+.project-visual {
+  min-height: 340px;
+  border-right: var(--line);
+  background: #fff;
+  padding: 18px;
+  display: grid;
+  place-items: center;
+}
+.visual-frame {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #fff;
+}
+.project-body { padding: 26px; }
+.project-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+  font-family: var(--font-en);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.ref { color: var(--blue); }
+.status {
+  padding: 4px 9px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--lime);
+}
+.status.wip { background: var(--yellow); }
+.status.private { background: var(--violet); color: #fff; }
+.project-body h3 {
+  margin: 0 0 8px;
+  font-size: clamp(26px, 4vw, 42px);
+  line-height: 1.05;
+  font-weight: 900;
+}
+.project-sub { margin: 0 0 18px; font-size: 17px; font-weight: 700; color: var(--blue); }
+.project-body ul {
+  margin: 18px 0;
+  padding-left: 20px;
+}
+.project-body li { margin-bottom: 8px; }
+.links { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 0; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 9px 14px;
+  border: var(--line);
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 4px 4px 0 var(--ink);
+  text-decoration: none;
+  font-family: var(--font-en);
+  font-size: 12px;
+  font-weight: 900;
+  cursor: pointer;
+}
+.btn.primary { background: var(--yellow); }
+.btn:hover { transform: translate(-1px, -1px); box-shadow: 6px 6px 0 var(--ink); }
+.details {
+  margin-top: 20px;
+  border-top: 2px dashed var(--ink);
+  padding-top: 14px;
+}
+.details summary {
+  width: fit-content;
+  padding: 7px 12px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: #fff;
+  font-weight: 900;
+  cursor: pointer;
+}
+.details summary::marker { content: ""; }
+.details summary::-webkit-details-marker { display: none; }
+.details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 16px;
+}
+.note {
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  background: #fff;
+  padding: 14px;
+}
+.note b { display: block; margin-bottom: 5px; }
+.note p { margin: 0; font-size: 14px; }
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.mini-card {
+  min-height: 310px;
+  display: flex;
+  flex-direction: column;
+  border: var(--line);
+  border-radius: var(--radius);
+  background: var(--sheet);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.mini-card[hidden] { display: none; }
+.mini-card:hover { transform: translate(-2px, -2px); box-shadow: 9px 9px 0 var(--ink); }
+.mini-img {
+  height: 145px;
+  border-bottom: var(--line);
+  background: linear-gradient(135deg, #ffc7dc, #b6ebff 52%, #fff0a7);
+  position: relative;
+}
+.mini-img::after {
+  content: attr(data-label);
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  padding: 5px 9px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--yellow);
+  font-family: var(--font-en);
+  font-size: 10px;
+  font-weight: 900;
+}
+.mini-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+}
+.mini-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-family: var(--font-en);
+  font-size: 10px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.mini-card h3 { margin: 0 0 8px; font-size: 22px; line-height: 1.08; }
+.mini-card p { margin: 0 0 16px; font-size: 14px; }
+.mini-card .links { margin-top: auto; }
+
+.workflow {
+  border: var(--line);
+  border-radius: var(--radius);
+  background: var(--blue);
+  color: #fff;
+  box-shadow: var(--shadow);
+  padding: 34px;
+}
+.workflow h2 { color: #fff; }
+.flow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  margin-top: 28px;
+}
+.flow-step {
+  min-height: 128px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 2px solid #fff;
+  border-radius: var(--radius);
+  background: var(--sheet);
+  color: var(--ink);
+  padding: 13px;
+}
+.flow-step b {
+  font-family: var(--font-en);
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--pink);
+  -webkit-text-stroke: 1px var(--ink);
+}
+.flow-step span { font-size: 13px; font-weight: 800; line-height: 1.3; }
+
+.experience {
+  display: grid;
+  gap: 14px;
+}
+.exp-row {
+  display: grid;
+  grid-template-columns: 160px 1fr 1.1fr;
+  gap: 20px;
+  align-items: center;
+  border: var(--line);
+  border-radius: var(--radius);
+  background: var(--sheet);
+  padding: 18px;
+}
+.exp-row .year {
+  font-family: var(--font-en);
+  font-weight: 900;
+  color: var(--pink);
+}
+.exp-row h3 { margin: 0; font-size: 20px; }
+.exp-row p { margin: 0; font-size: 14px; }
+
+footer {
+  padding: 80px 0 42px;
+  background: var(--pink);
+  border-top: var(--line);
+}
+.contact-box {
+  border: var(--line);
+  border-radius: var(--radius);
+  background: var(--sheet);
+  box-shadow: var(--shadow);
+  padding: clamp(26px, 5vw, 54px);
+  text-align: center;
+}
+.contact-box .label {
+  font-family: var(--font-en);
+  font-size: 13px;
+  font-weight: 900;
+  color: var(--blue);
+  text-transform: uppercase;
+}
+.email {
+  display: block;
+  margin: 18px auto 20px;
+  font-family: var(--font-en);
+  font-size: clamp(32px, 6vw, 76px);
+  font-weight: 900;
+  line-height: 1;
+  text-decoration: none;
+  word-break: break-word;
+}
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.copyright {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 42px;
+  font-family: var(--font-en);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .45s ease, transform .45s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 900px) {
+  .topbar { position: static; border-radius: var(--radius); align-items: flex-start; }
+  .nav { display: none; }
+  .hero { padding-top: 52px; }
+  .hero-grid,
+  .project-card { grid-template-columns: 1fr; display: grid; }
+  .project-visual { border-right: 0; border-bottom: var(--line); }
+  .stats,
+  .ability-grid,
+  .catalog-grid { grid-template-columns: 1fr 1fr; }
+  .flow { grid-template-columns: 1fr 1fr; }
+  .exp-row { grid-template-columns: 1fr; }
+  .details-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 560px) {
+  .wrap,
+  .topbar { width: min(100% - 24px, 1160px); }
+  .hero-title span,
+  .hero-title strong {
+    -webkit-text-stroke: 2px var(--ink);
+    text-shadow: 3px 3px 0 var(--ink);
+  }
+  .stats,
+  .ability-grid,
+  .catalog-grid,
+  .flow { grid-template-columns: 1fr; }
+  .project-body,
+  .workflow { padding: 20px; }
+  .email { font-size: 30px; }
+  .copyright { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="#top">ZHU / AI PROFILE</a>
+  <nav class="nav" aria-label="页面导航">
+    <a href="#abilities">CATALOG</a>
+    <a href="#works">PROJECTS</a>
+    <a href="#workflow">WORKFLOW</a>
+    <a href="#contact">DISPATCH</a>
+  </nav>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow"><span class="dot"></span>朱芷怡 · AI 应用作品集 / 2026</div>
+      <h1 class="hero-title"><strong>AI Native</strong><br><span>Profile</span></h1>
+      <div class="banner">业务问题 → AI 原型 → 效果验证</div>
+
+      <div class="hero-grid">
+        <div class="portrait reveal" aria-label="朱芷怡在 OPC 特色赛深圳站现场发言照片">
+          <span class="name-sticker">ZHU ZHIYI</span>
+          <img src="assets/profile-opc-crop.png" alt="朱芷怡在 OPC 特色赛深圳站现场发言">
+          <span class="photo-stamp">FIELD NOTE / SHENZHEN</span>
+        </div>
+        <div class="profile-card reveal">
+          <div class="stats" aria-label="核心数字">
+            <div class="stat"><span><b data-count="4">0</b><small>Public Repos</small></span></div>
+            <div class="stat"><span><b data-count="4">0</b><small>Live Demos</small></span></div>
+            <div class="stat"><span><b data-count="20">0</b><small>RAG Tests</small></span></div>
+            <div class="stat"><span><b data-count="5">0</b><small>Agents</small></span></div>
+          </div>
+          <span class="role-chip">AI 应用实践者</span>
+          <p>以 <strong>AI Native 工作流</strong>推进 AI 应用实践：从真实业务场景、需求拆解、Prompt / RAG / Agent 设计，到 Demo 实现、测试验证和效果迭代。</p>
+          <div class="chips">
+            <span class="chip">CODEX</span>
+            <span class="chip">COZE</span>
+            <span class="chip">RAG</span>
+            <span class="chip">AGENT</span>
+            <span class="chip">PROMPT</span>
+            <span class="chip">SQL</span>
+            <span class="chip">VERCEL</span>
+            <span class="chip">TO B</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="abilities">
+    <div class="wrap">
+      <span class="section-label">Capability Registry</span>
+      <div class="section-head">
+        <h2>能力地图</h2>
+      </div>
+      <div class="ability-grid">
+        <article class="ability reveal">
+          <div class="no">01</div>
+          <h3>业务理解</h3>
+          <p>财政系统与医院 PACS 一线实施，见过真实用户如何提问、卡住、求助和使用系统。</p>
+        </article>
+        <article class="ability reveal">
+          <div class="no">02</div>
+          <h3>产品拆解</h3>
+          <p>能把场景拆成角色、流程、规则、边界与 MVP，不把 AI 当万能解法。</p>
+        </article>
+        <article class="ability reveal">
+          <div class="no">03</div>
+          <h3>AI 应用设计</h3>
+          <p>Prompt 约束、RAG 调优、Agent 分工、质量门与降级机制，关注效果而不是只调 API。</p>
+        </article>
+        <article class="ability reveal">
+          <div class="no">04</div>
+          <h3>AI 辅助实现</h3>
+          <p>主力使用 Codex 等 AI 编程工具，将想法推进到可访问 Demo、GitHub 仓库和可验证结果。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="works">
+    <div class="wrap">
+      <span class="section-label">Selected Works / 001-003</span>
+      <div class="section-head">
+        <h2>重点项目</h2>
+      </div>
+
+      <div class="filters" aria-label="项目筛选">
+        <button class="filter-btn active" data-filter="all">ALL</button>
+        <button class="filter-btn" data-filter="agent">AGENT</button>
+        <button class="filter-btn" data-filter="rag">RAG</button>
+        <button class="filter-btn" data-filter="demo">LIVE DEMO</button>
+        <button class="filter-btn" data-filter="product">PRODUCT</button>
+        <button class="filter-btn" data-filter="tob">TO B</button>
+      </div>
+
+      <div class="featured">
+        <article class="project-card reveal" data-tags="agent tob product">
+          <div class="project-visual">
+            <div class="visual-frame">
+              <svg viewBox="0 0 640 420" width="100%" height="100%" role="img" aria-label="智策一线通五个 Agent 架构图">
+                <rect width="640" height="420" fill="#fffaf0"/>
+                <rect x="42" y="34" width="556" height="352" rx="8" fill="#e0f7ff" stroke="#171717" stroke-width="4"/>
+                <rect x="216" y="60" width="208" height="58" rx="8" fill="#ffe04b" stroke="#171717" stroke-width="4"/>
+                <text x="320" y="94" text-anchor="middle" font-family="Inter" font-weight="900" font-size="20" fill="#171717">TeamLeader</text>
+                <text x="320" y="113" text-anchor="middle" font-family="Noto Sans SC" font-size="12" fill="#171717">意图识别 · 分发 · 兜底</text>
+                <g stroke="#171717" stroke-width="3">
+                  <line x1="320" y1="118" x2="320" y2="158"/>
+                  <line x1="102" y1="158" x2="538" y2="158"/>
+                  <line x1="102" y1="158" x2="102" y2="184"/>
+                  <line x1="211" y1="158" x2="211" y2="184"/>
+                  <line x1="320" y1="158" x2="320" y2="184"/>
+                  <line x1="429" y1="158" x2="429" y2="184"/>
+                  <line x1="538" y1="158" x2="538" y2="184"/>
+                </g>
+                <g font-family="Noto Sans SC" font-weight="900" font-size="14" text-anchor="middle">
+                  <rect x="52" y="184" width="100" height="72" rx="8" fill="#f7a8c7" stroke="#171717" stroke-width="3"/>
+                  <text x="102" y="216">流程导航</text><text x="102" y="239" font-size="11" font-weight="500">多系统协作</text>
+                  <rect x="161" y="184" width="100" height="72" rx="8" fill="#c7ff35" stroke="#171717" stroke-width="3"/>
+                  <text x="211" y="216">权限诊断</text><text x="211" y="239" font-size="11" font-weight="500">岗位/年度/单位</text>
+                  <rect x="270" y="184" width="100" height="72" rx="8" fill="#a779ff" stroke="#171717" stroke-width="3"/>
+                  <text x="320" y="216" fill="#fff">业务专家</text><text x="320" y="239" font-size="11" font-weight="500" fill="#fff">规则理解</text>
+                  <rect x="379" y="184" width="100" height="72" rx="8" fill="#7ce0c3" stroke="#171717" stroke-width="3"/>
+                  <text x="429" y="216">跨域流转</text><text x="429" y="239" font-size="11" font-weight="500">跨系统定位</text>
+                  <rect x="488" y="184" width="100" height="72" rx="8" fill="#ff775c" stroke="#171717" stroke-width="3"/>
+                  <text x="538" y="216">知识管理</text><text x="538" y="239" font-size="11" font-weight="500">沉淀归类</text>
+                </g>
+                <rect x="86" y="300" width="468" height="52" rx="8" fill="#fff" stroke="#171717" stroke-width="3" stroke-dasharray="8 6"/>
+                <text x="320" y="322" text-anchor="middle" font-family="Noto Sans SC" font-weight="900" font-size="15" fill="#171717">Agent = 参谋，不是操作</text>
+                <text x="320" y="344" text-anchor="middle" font-family="Noto Sans SC" font-size="12" fill="#171717">不接入生产系统 · 不执行 SQL · 不写业务数据</text>
+              </svg>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-meta"><span class="ref">REF. 01A / AGENT</span><span class="status wip">进行中</span></div>
+            <h3>智策·一线通</h3>
+            <p class="project-sub">企业级运维知识 Agent 系统 · GOAI 大赛参赛</p>
+            <ul>
+              <li>面向企业级信息系统一线运维场景，设计多 Agent 协同的知识与决策辅助系统。</li>
+              <li>基于真实运维场景抽象 10 类高频问题，拆成 5 个专家 Agent，由 TeamLeader 调度。</li>
+              <li>明确 Agent 定位为“参谋而非操作”，不接入生产系统、不执行实际操作，规避数据安全与越权风险。</li>
+            </ul>
+            <div class="chips">
+              <span class="chip">5 AGENTS</span><span class="chip">10 SCENARIOS</span><span class="chip">TO B OPS</span>
+            </div>
+            <details class="details">
+              <summary>项目细节</summary>
+              <div class="details-grid">
+                <div class="note"><b>设计判断</b><p>单一大模型处理不了流程、权限、跨域流转等多类问题，需要拆成不同职责的 Agent。</p></div>
+                <div class="note"><b>迭代计划</b><p>项目仍在进行中，后续重点补充用户反馈闭环和更多脱敏场景样本。</p></div>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <article class="project-card reveal" data-tags="demo product">
+          <div class="project-visual">
+            <div class="visual-frame">
+              <svg viewBox="0 0 640 420" width="100%" height="100%" role="img" aria-label="AI 商品分析助手事实层生成层质量门图">
+                <rect width="640" height="420" fill="#fffaf0"/>
+                <rect x="34" y="58" width="160" height="180" rx="8" fill="#c7ff35" stroke="#171717" stroke-width="4"/>
+                <rect x="240" y="58" width="160" height="180" rx="8" fill="#f7a8c7" stroke="#171717" stroke-width="4"/>
+                <rect x="446" y="58" width="160" height="180" rx="8" fill="#7ce0c3" stroke="#171717" stroke-width="4"/>
+                <g font-family="Noto Sans SC" text-anchor="middle" fill="#171717">
+                  <text x="114" y="104" font-size="24" font-weight="900">事实层</text>
+                  <text x="114" y="140" font-size="14">标题 / 价格 / 规格</text>
+                  <text x="114" y="166" font-size="14">页面提取或人工补充</text>
+                  <text x="114" y="204" font-size="13" font-weight="900">AI 不允许改写</text>
+                  <text x="320" y="104" font-size="24" font-weight="900">生成层</text>
+                  <text x="320" y="140" font-size="14">分析 / 口播 / 风险提示</text>
+                  <text x="320" y="166" font-size="14">只加工，不编造</text>
+                  <text x="320" y="204" font-size="13" font-weight="900">必须标注来源</text>
+                  <text x="526" y="104" font-size="24" font-weight="900">质量门</text>
+                  <text x="526" y="140" font-size="14">长度 / 钩子</text>
+                  <text x="526" y="166" font-size="14">事实来源 / 违规词</text>
+                  <text x="526" y="204" font-size="13" font-weight="900">规则检查，不用 AI</text>
+                </g>
+                <path d="M202 148 H232" stroke="#171717" stroke-width="4"/><path d="M232 148 l-12 -8 v16z" fill="#171717"/>
+                <path d="M408 148 H438" stroke="#171717" stroke-width="4"/><path d="M438 148 l-12 -8 v16z" fill="#171717"/>
+                <rect x="74" y="292" width="492" height="62" rx="8" fill="#ffe04b" stroke="#171717" stroke-width="4" stroke-dasharray="9 6"/>
+                <text x="320" y="319" text-anchor="middle" font-family="Noto Sans SC" font-size="16" font-weight="900">降级机制：信息不足时不伪装完整分析</text>
+                <text x="320" y="343" text-anchor="middle" font-family="Noto Sans SC" font-size="13">明确提示 + 引导补录关键事实 → 二次分析</text>
+              </svg>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-meta"><span class="ref">REF. 02B / AI APP</span><span class="status">已部署</span></div>
+            <h3>AI 商品分析助手</h3>
+            <p class="project-sub">跨境电商商品 AI 分析与口播生成工具</p>
+            <ul>
+              <li>借助 AI 工具完成从需求拆解到部署的全流程，实现 Amazon 商品解析、事实提取、AI 分析、口播生成与质量检查。</li>
+              <li>核心设计是事实层与生成层分离，关键事实只来自页面提取或人工补充，从架构上抑制幻觉。</li>
+              <li>设计人工补充降级模式与规则型质量门，输出“页面事实 / AI 推断 / 建议核对”三类可信度提示。</li>
+            </ul>
+            <div class="links">
+              <a class="btn primary" href="https://amazon-ai-product-analyst.vercel.app" target="_blank" rel="noopener">LIVE DEMO</a>
+              <a class="btn" href="https://github.com/Hamiutto/amazon-ai-product-analyst" target="_blank" rel="noopener">GITHUB</a>
+            </div>
+            <details class="details">
+              <summary>项目细节</summary>
+              <div class="details-grid">
+                <div class="note"><b>核心设计</b><p>AI 效果工程的核心不只是调 Prompt，而是设计系统边界和降级路径。</p></div>
+                <div class="note"><b>迭代计划</b><p>下一步计划补充语义质量检查和同商品多版本对比，用真实反馈继续优化输出质量。</p></div>
+              </div>
+            </details>
+          </div>
+        </article>
+
+        <article class="project-card reveal" data-tags="rag product tob">
+          <div class="project-visual">
+            <div class="visual-frame">
+              <svg viewBox="0 0 640 420" width="100%" height="100%" role="img" aria-label="Coze RAG 编造率治理图">
+                <rect width="640" height="420" fill="#fffaf0"/>
+                <rect x="48" y="46" width="544" height="328" rx="8" fill="#fff" stroke="#171717" stroke-width="4"/>
+                <text x="82" y="90" font-family="Inter" font-size="20" font-weight="900" fill="#171717">20 TEST CASES</text>
+                <g font-family="Noto Sans SC" font-size="13" fill="#171717">
+                  <text x="82" y="133">基础召回</text><rect x="184" y="118" width="300" height="18" rx="4" fill="#c7ff35" stroke="#171717" stroke-width="2"/><text x="502" y="133" font-weight="900">10</text>
+                  <text x="82" y="174">跨文档整合</text><rect x="184" y="159" width="120" height="18" rx="4" fill="#f7a8c7" stroke="#171717" stroke-width="2"/><text x="322" y="174" font-weight="900">4</text>
+                  <text x="82" y="215">边界兜底</text><rect x="184" y="200" width="120" height="18" rx="4" fill="#ffe04b" stroke="#171717" stroke-width="2"/><text x="322" y="215" font-weight="900">4</text>
+                  <text x="82" y="256">多轮对话</text><rect x="184" y="241" width="60" height="18" rx="4" fill="#7ce0c3" stroke="#171717" stroke-width="2"/><text x="262" y="256" font-weight="900">2</text>
+                </g>
+                <rect x="82" y="296" width="204" height="52" rx="8" fill="#ff775c" stroke="#171717" stroke-width="3"/>
+                <text x="184" y="318" text-anchor="middle" font-family="Inter" font-weight="900" font-size="18" fill="#171717">BEFORE ≈50%</text>
+                <text x="184" y="339" text-anchor="middle" font-family="Noto Sans SC" font-size="12" fill="#171717">文档空白处补常识</text>
+                <rect x="354" y="296" width="204" height="52" rx="8" fill="#7ce0c3" stroke="#171717" stroke-width="3"/>
+                <text x="456" y="318" text-anchor="middle" font-family="Inter" font-weight="900" font-size="18" fill="#171717">AFTER DOWN</text>
+                <text x="456" y="339" text-anchor="middle" font-family="Noto Sans SC" font-size="12" fill="#171717">文档补充 + Prompt 约束</text>
+              </svg>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-meta"><span class="ref">REF. 03C / RAG</span><span class="status wip">进行中</span></div>
+            <h3>Coze 编造率治理</h3>
+            <p class="project-sub">企业知识库问答助手 · RAG 效果治理</p>
+            <ul>
+              <li>基于 Coze 搭建企业知识库问答助手，模拟 HR + 财务制度咨询场景。</li>
+              <li>设计 20 题测试用例，覆盖基础召回、跨文档整合、边界兜底、多轮对话四个维度。</li>
+              <li>识别模型在文档空白处补常识的规律，通过“文档补充 + Prompt 约束”双路径降低幻觉。</li>
+            </ul>
+            <div class="chips">
+              <span class="chip">20 TESTS</span><span class="chip">4 DIMENSIONS</span><span class="chip">BADCASE</span>
+            </div>
+            <details class="details">
+              <summary>项目细节</summary>
+              <div class="details-grid">
+                <div class="note"><b>方法沉淀</b><p>AI 优化不能凭感觉，要“测出来 → 归因 → 再测”。</p></div>
+                <div class="note"><b>迭代计划</b><p>后续计划扩充测试题规模，并整理成可复用的知识库问答回归测试清单。</p></div>
+              </div>
+            </details>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="catalog">
+    <div class="wrap">
+      <span class="section-label">Catalogue Raisonne / More Works</span>
+      <div class="section-head">
+        <h2>其他实践项目</h2>
+      </div>
+      <div class="catalog-grid">
+        <article class="mini-card reveal" data-tags="demo">
+          <div class="mini-img" data-label="ASTRO / SEO"></div>
+          <div class="mini-content">
+            <div class="mini-row"><span>REF. 04D</span><span>已部署</span></div>
+            <h3>Windrose Guides</h3>
+            <p>Astro + Tailwind 内容站，完成 sitemap、JSON-LD、OG、Canonical 等 SEO 工程实践。</p>
+            <div class="links"><a class="btn" href="https://windrose-guide-site.vercel.app" target="_blank" rel="noopener">LIVE</a></div>
+          </div>
+        </article>
+        <article class="mini-card reveal" data-tags="demo product">
+          <div class="mini-img" data-label="VUE / COMMUNITY"></div>
+          <div class="mini-content">
+            <div class="mini-row"><span>REF. 05E</span><span>公开仓库</span></div>
+            <h3>她行社区</h3>
+            <p>女性成长互助社区应用，Vue 3 单页应用 + Node 服务 + JWT 认证实践。</p>
+            <div class="links"><a class="btn" href="https://github.com/Hamiutto/she-can-do-anything" target="_blank" rel="noopener">GITHUB</a></div>
+          </div>
+        </article>
+        <article class="mini-card reveal" data-tags="tob product">
+          <div class="mini-img" data-label="AI SOLUTION"></div>
+          <div class="mini-content">
+            <div class="mini-row"><span>REF. 06F</span><span>方案设计</span></div>
+            <h3>供应链风险预警</h3>
+            <p>面向医药制造的 AI 落地方案设计，包含数据层、AI 分析层、决策支持层和 6 部门协同。</p>
+          </div>
+        </article>
+        <article class="mini-card reveal" data-tags="product">
+          <div class="mini-img" data-label="PRIVATE TOOL"></div>
+          <div class="mini-content">
+            <div class="mini-row"><span>REF. 07G</span><span>私有可演示</span></div>
+            <h3>ai-workbench</h3>
+            <p>个人 AI 信息闭环工作台，含新闻聚合、知识库、灵感库、项目库、每日推送等模块。</p>
+          </div>
+        </article>
+        <article class="mini-card reveal" data-tags="product">
+          <div class="mini-img" data-label="HEALTH MVP"></div>
+          <div class="mini-content">
+            <div class="mini-row"><span>REF. 08H</span><span>团队项目</span></div>
+            <h3>产后抑郁辅助产品</h3>
+            <p>担任开发负责人，用 VibeCoding + Android Studio 推进需求定义、MVP 规划与功能实现。</p>
+          </div>
+        </article>
+        <article class="mini-card reveal" data-tags="product tob">
+          <div class="mini-img" data-label="MEDICAL AI"></div>
+          <div class="mini-content">
+            <div class="mini-row"><span>REF. 09I</span><span>MVP 设计</span></div>
+            <h3>AI 医疗导诊</h3>
+            <p>结合智能医学工程背景，设计导诊 Prompt、交互流程、拒答策略与“不替代医生诊断”的安全边界。</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="workflow">
+    <div class="wrap">
+      <div class="workflow reveal">
+        <span class="section-label" style="background:#ffe04b; color:#171717;">Operating Method</span>
+        <div class="section-head">
+          <h2>AI Native 工作流</h2>
+        </div>
+        <div class="flow">
+          <div class="flow-step"><b>01</b><span>业务问题</span></div>
+          <div class="flow-step"><b>02</b><span>需求拆解</span></div>
+          <div class="flow-step"><b>03</b><span>Prompt / RAG / Agent 方案</span></div>
+          <div class="flow-step"><b>04</b><span>AI 辅助实现</span></div>
+          <div class="flow-step"><b>05</b><span>测试用例</span></div>
+          <div class="flow-step"><b>06</b><span>失败样本分析</span></div>
+          <div class="flow-step"><b>07</b><span>迭代优化</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <span class="section-label">Chronological Registry</span>
+      <div class="section-head">
+        <h2>背景经历</h2>
+      </div>
+      <div class="experience">
+        <div class="exp-row reveal">
+          <div class="year">2025.12 - 至今</div>
+          <h3>实施工程师 · 政府数字财政系统</h3>
+          <p>全市集中运维、用户支持、SQL 异常定位、问题闭环与知识沉淀。</p>
+        </div>
+        <div class="exp-row reveal">
+          <div class="year">2025.02 - 2025.11</div>
+          <h3>实施工程师 · 三甲医院 PACS</h3>
+          <p>驻点医院信息科，负责 PACS 实施、上线、运维、需求沟通与培训支持。</p>
+        </div>
+        <div class="exp-row reveal">
+          <div class="year">2021.09 - 2025.06</div>
+          <h3>广东药科大学 · 智能医学工程</h3>
+          <p>本科，智能医学工程背景，关注医疗信息化与 AI 应用边界。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-box reveal">
+      <div class="label">Communications Dispatch</div>
+      <a class="email" href="mailto:603195767@qq.com">603195767@qq.com</a>
+      <div class="footer-links">
+        <a class="btn primary" href="tel:19230967477">19230967477</a>
+        <a class="btn" href="https://github.com/Hamiutto" target="_blank" rel="noopener">GITHUB</a>
+      </div>
+    </div>
+    <div class="copyright">
+      <span>Based in Guangdong Shaoguan · AI Application Portfolio</span>
+      <span>2026 · 持续做、持续学，把 AI 当工程问题做</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+function countUp(el, target, duration) {
+  var start = null;
+  function step(ts) {
+    if (!start) start = ts;
+    var progress = Math.min((ts - start) / duration, 1);
+    var eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(eased * target);
+    if (progress < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+document.querySelectorAll("[data-count]").forEach(function (el) {
+  countUp(el, parseInt(el.getAttribute("data-count"), 10), 1200);
+});
+
+var observer = new IntersectionObserver(function (entries) {
+  entries.forEach(function (entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll(".reveal").forEach(function (el) {
+  observer.observe(el);
+});
+
+var buttons = document.querySelectorAll(".filter-btn");
+var cards = document.querySelectorAll("[data-tags]");
+buttons.forEach(function (button) {
+  button.addEventListener("click", function () {
+    var filter = button.getAttribute("data-filter");
+    buttons.forEach(function (b) { b.classList.remove("active"); });
+    button.classList.add("active");
+    cards.forEach(function (card) {
+      var tags = card.getAttribute("data-tags").split(" ");
+      card.hidden = filter !== "all" && tags.indexOf(filter) === -1;
+    });
+  });
+});
+</script>
+</body>
+</html>
